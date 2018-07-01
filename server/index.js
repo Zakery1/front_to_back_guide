@@ -1,17 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mc = require('./controllers/countries_controller');
+
+
 
 const app = express();
+app.use(express.static('public'));
+app.use( bodyParser.json() );
 
-let customers = [
-    {id: 1, name: 'josh'},
-    {id: 2000, name: 'brent'},
-    {id: 3, name: 'hunter'}
-]
+app.get('/api/allCountries', mc.read)
+app.post('/api/addCountries', mc.create)
+app.delete('/api/deleteCountries/:id', mc.delete)
+app.put('/api/editReview/:id', mc.update)
+
+// app.post('/api/', stuff.addCharacter)
+// app.delete('/api/deletecharacters/:id', stuff.deleteCharacter)
+// app.put('/api/editcharacters/', stuff.editCharacter)
 
 
-app.get('/api/customer_names', (req, res) => {
-    res.status(200).json(customers);
-})
-
+const Port = 4000;
 app.listen(4000, ()=> console.log('server running on port 4000'));
