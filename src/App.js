@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import CoolComponent from './coolComponent';
 
 import './App.css';
 import Banner from './Banner.js';
@@ -18,10 +19,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    
-  }
-
-  getCountryInfo = () => {
     axios.get('/api/allCountries').then(res => {
       console.log(res.data);
       this.setState({
@@ -32,23 +29,37 @@ class App extends Component {
     })
   }
 
-  addCountry = () => {
-    axios.post('/api/addCountries', {country: this.state.country}).then(res => {
-      console.log(res)
-      this.setState({
-        countryNames: res.data,
-        country: '',
-        countryImage: '',
-        countryReview:''
-      })
+  getCountryInfo = () => {
+    // axios.get('/api/allCountries').then(res => {
+    //   console.log(res.data);
+    //   this.setState({
+    //     countryNames: res.data,
+    //     countryImage: res.data,
+    //     countryReview: res.data
+    //   })
+    // })
+  }
 
+  addCountry = (param) => {
+    const { country, countryImage, review } = this.state
+    axios.post('/api/addCountries', { country, countryImage }).then(res => {
+      console.log("----response",res)
+      console.log('res data-----', res.data)
+      axios.get('/api/allCountries').then(response => {
+        console.log(res.data);
+        this.setState({
+          countryNames: response.data,
+          countryImage: response.data,
+          countryReview: response.data
+        })
+      })
     })
   }
 
   deleteCountry = (id) => {
     // console.log('deleteCountry id', id )
     // console.log('country', this.state.country)
-    axios.delete(`/api/deleteCountries/${id}, `).then(response => {
+    axios.delete(`/api/deleteCountries/${id}`).then(response => {
       // ff
       this.setState({countryNames: response.data})
     
@@ -81,6 +92,12 @@ class App extends Component {
       })
   }
 
+  changeHandelerImage = (val) => {
+    this.setState({
+      countryImage: val
+    })
+  }
+
   changeHandlerReview = (val) => {
     this.setState({
       review: val
@@ -95,22 +112,25 @@ class App extends Component {
                 <img src={country.image} />
                 <div>review: {country.review}</div>
                 <button onClick={()=> this.editReview(country.id, this.state.review )} className="reviewButton">edit review</button>
-                <input onChange={(e) => this.changeHandlerReview(e.target.value)} type="text"/>
+                <input onChange={(e) => this.changeHandlerReview(e.target.value)} type="text" className="reviewInput"/>
                 <button className="delete-button" onClick={() => this.deleteCountry(country.id)}>X</button>
             </div>
     })
     console.log(this.state.country)
+    console.log(names)
     return (
-      <div className="App">
-        <div>{this.state.review}</div>
+      <div className="App"> 
+        
         <Banner/>
-      {names}
-       <button onClick={() => this.getCountryInfo()}>Country</button>
+        <CoolComponent />
+        {names}
+       
        <div>
-          <input onChange={(e) => this.changeHandler(e.target.value)} value={this.state.country}/>
-          <button onClick={() => this.addCountry()}>Add Country</button>
-          <button onClick={(e) => this.deleteCountry(e)}>Delete Country</button>
-          <button onClick={(e) => this.editReview(e)}>Edit Review</button>
+          <input className="new-country-input" onChange={(e) => this.changeHandler(e.target.value)}  placeholder="enter country name here"/>
+          <input className="new-country-input" onChange={(e) => this.changeHandelerImage(e.target.value)} placeholder="enter image url here" />
+    
+          <button className="reviewButton" onClick={() => this.addCountry() }>Add Country</button>
+          
        </div>
       </div>
     );

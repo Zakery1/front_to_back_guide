@@ -1,14 +1,14 @@
-let countries = require ('./countries');
+const countries = require ('./countries');
 
 module.exports = {
     create(req, res) {
-    // console.log(req.body)
-    const { country } = req.body;
+    console.log('create---', req.body)
+    const { country, countryImage } = req.body;
+    console.log('req.body',req.body)
     countries.push({
         id: countries.length + 1,
         name: country,
-        image: image,
-        review: review
+        image: countryImage,
     });
     
         // const countryName = req.params.name;

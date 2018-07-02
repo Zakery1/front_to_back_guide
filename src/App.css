@@ -1,19 +1,19 @@
 .App {
   text-align: center;
-  border: green;
-  border-width: 5px;
 }
 
 
 .country-name {
   color: green;
   font-size: 20px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 .delete-button {
   color: grey;
   border: none;
-  font-size: 20px;
+  font-size: 10px;
 }
 
 .delete-button:hover {
@@ -30,3 +30,54 @@
   margin-bottom: 10px;
 }
 
+.reviewButton {
+  background: green;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:.8em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+
+.reviewButton:hover{
+  background:#fff;
+  color: green;
+}
+
+.reviewButton:before,.reviewButton:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: green;
+  transition:400ms ease all;
+}
+.reviewButton:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.reviewButton:hover:before,.reviewButton:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.reviewInput {
+  height: 18px;
+}
+
+.new-country-input {
+  height: 20px;
+  width: 200px;
+}
+
+.new-country-input:hover {
+  background-attachment: rgb(127, 179, 127);
+}
