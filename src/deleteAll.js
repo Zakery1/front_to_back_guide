@@ -5,8 +5,8 @@ import axios from 'axios';
 const DeleteAll = (props) => {
     
     return (
-        <div>
-            <button onClick={() => props.deleteAll()}>Delete All</button>
+        <div className="loadreload">
+            <button className="reviewButton" onClick={() => props.deleteAll()}>Delete All</button>
         </div>
     )
 }

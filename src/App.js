@@ -4,7 +4,9 @@ import CoolComponent from './coolComponent';
 
 import './App.css';
 import Banner from './Banner.js';
-import DeleteAll from './deleteAll.js';
+import DeleteAll from './deleteAll';
+import Footer from './FooterComponent';
+
 
 class App extends Component {
   constructor(){
@@ -137,8 +139,9 @@ class App extends Component {
    console.log('RENDER')
     let names = this.state.countryNames.map(country => {
       return <div className='country-name' key={country.id}>
-                {country.name}
+                <p className="thecountry">{country.name}</p> 
                 <img src={country.image} />
+                
                 <div>review: {country.review}</div>
                 <button onClick={()=> this.editReview(country.id, this.state.review )} className="reviewButton">edit review</button>
                 <input onChange={(e) => this.changeHandlerReview(e.target.value)} type="text" className="reviewInput"/>
@@ -151,19 +154,19 @@ class App extends Component {
     return (
       <div className="App"> 
         
-        <Banner/>
+        <Banner />
         <CoolComponent />
         {names}
-       <div>
+       <div className="loadreload">
           <input className="new-country-input" onChange={(e) => this.changeHandler(e.target.value)}  placeholder="enter country name here"/>
           <input className="new-country-input" onChange={(e) => this.changeHandelerImage(e.target.value)} placeholder="enter image url here" />
     
           <button className="reviewButton" onClick={() => this.addCountry() }>Add Country</button>
           
-            <DeleteAll className="reviewButton" deleteAll={this.deleteAll}/>
+            <DeleteAll  deleteAll={this.deleteAll}/>
             <button className="reviewButton" onClick={this.reloadAll}>reload</button>
-            
-       </div>
+       </div> 
+       <Footer />
       </div>
     );
   }

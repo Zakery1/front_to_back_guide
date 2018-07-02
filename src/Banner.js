@@ -3,15 +3,12 @@ import axios from 'axios';
 
 import './App.css';
 
-class Banner extends Component {
-
-  render() {
+function Banner () {
     return (
       <div className="Banner">
         Country Reviews for Tourists!!!
       </div>
     );
   }
-}
 
 export default Banner;

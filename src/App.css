@@ -6,8 +6,8 @@
 .country-name {
   color: green;
   font-size: 20px;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  border-bottom: 2px solid green;
+  padding: 40px;
 }
 
 .delete-button {
@@ -80,4 +80,13 @@
 
 .new-country-input:hover {
   background-attachment: rgb(127, 179, 127);
+}
+
+.loadreload {
+  display: inline-block;
+  margin: 0 10px 50px 10px;
+}
+
+.thecountry {
+  font-size: 48px;
 }
