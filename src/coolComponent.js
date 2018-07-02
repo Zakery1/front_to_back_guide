@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import './App.css';
 
 class CoolComponent extends Component {
     constructor(props){
@@ -60,7 +61,7 @@ class CoolComponent extends Component {
                 <p> the temperature in {this.state.cityName}:</p>
                 <p className='temp'>{this.state.temperature}&#8457;</p>
                 <input className='input-periphs weatherZip' onChange={(e) => this.setState({zipCode: e.target.value})} placeholder='Enter Zip Code'/>
-                <button onClick={() => this.updateZip(this.state.zipCode)} className='btn input-periphs'>Submit</button>
+                <button className="reviewButton" onClick={() => this.updateZip(this.state.zipCode)} className='btn input-periphs'>Submit</button>
             </div>
         )
     }

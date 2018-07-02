@@ -4,6 +4,7 @@ import CoolComponent from './coolComponent';
 
 import './App.css';
 import Banner from './Banner.js';
+import DeleteAll from './deleteAll.js';
 
 class App extends Component {
   constructor(){
@@ -65,6 +66,14 @@ class App extends Component {
     
     });
   }
+
+  deleteEveryCountry = () => {
+    axios.delete(`'/api/deleteAll/'`).then(response => {
+      this.setState({
+        countryNames: []
+    });
+  })
+  }
   
   editReview = (id, review) => {
     console.log('reviewid', id)
@@ -86,6 +95,8 @@ class App extends Component {
     });
   }
 
+  deleteAll
+
   changeHandler = (val) => {
       this.setState({
         country: val
@@ -102,7 +113,25 @@ class App extends Component {
     this.setState({
       review: val
     })
-}
+  }
+
+  deleteAll = () => {
+    console.log('hit')
+    axios.delete('/api/deleteAll').then(response => {
+      this.setState({
+        countryNames: response.data
+      })
+    })
+  }
+    reloadAll = () => {
+      console.log('hit reload all')
+      axios.get('/api/reloadAll').then(response => {
+        console.log(response);
+        this.setState({
+          countryNames: response.data
+        })
+      })   
+  }
 
   render() {
    console.log('RENDER')
@@ -118,19 +147,22 @@ class App extends Component {
     })
     console.log(this.state.country)
     console.log(names)
+    console.log(this.state.countryNames)
     return (
       <div className="App"> 
         
         <Banner/>
         <CoolComponent />
         {names}
-       
        <div>
           <input className="new-country-input" onChange={(e) => this.changeHandler(e.target.value)}  placeholder="enter country name here"/>
           <input className="new-country-input" onChange={(e) => this.changeHandelerImage(e.target.value)} placeholder="enter image url here" />
     
           <button className="reviewButton" onClick={() => this.addCountry() }>Add Country</button>
           
+            <DeleteAll className="reviewButton" deleteAll={this.deleteAll}/>
+            <button className="reviewButton" onClick={this.reloadAll}>reload</button>
+            
        </div>
       </div>
     );

@@ -1,4 +1,5 @@
-const countries = require ('./countries');
+let countries = require('./countries');
+let reloadedCountries = require('./reloadedCountries');
 
 module.exports = {
     create(req, res) {
@@ -71,6 +72,20 @@ module.exports = {
         //     console.log("===== isTrue: ", isTrue)
         //     return isTrue
         // countries.splice( index, 1);
+        res.status(200).send(countries)
+    },
+
+    deleteAll: (req, res ) => {
+
+        countries = [];
+        res.status(200).json(countries)
+    },
+    reloadAll: (req, res) => {
+        // console.log(req.params.name)
+        // const countryName = req.param.name;
+        console.log('hit')
+        // let index = countries.findIndex(element => element.name == countryName);
+        countries = reloadedCountries;
         res.status(200).send(countries)
     }
 
